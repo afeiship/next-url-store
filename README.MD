@@ -13,8 +13,17 @@
     items:[1,2,3,4]
   };
 
+
+  //Set some data to sessionStorage:
+  uStore.local = {local_name:123};
+  uStore.local = {
+    local_age:1234,
+    local_items:[1,2,3,4]
+  };
+
   //Get data from sessionStorage:
   console.log(uStore.session);
+  console.log(uStore.local);
 ```
 
 ## resources:

@@ -11,14 +11,27 @@
   <script src="../node_modules/next-store/dist/next-store.js"></script>
   <script src="../src/next-url-store.js"></script>
   <script>
-    var uStore = new nx.UrlStore('__FEI_TE)ST_KEY');
-    uStore.session = {name:123};
-    uStore.session = {
-      age:1234,
-      items:[1,2,3,4]
-    };
+  var NxUrlStore = nx.UrlStore || require('next-url-store');
+  var uStore =  new NxUrlStore('__A_UNIQUE_KEY__');
 
-    console.log(uStore.session);
+  //Set some data to sessionStorage:
+  uStore.session = {name:123};
+  uStore.session = {
+    age:1234,
+    items:[1,2,3,4]
+  };
+
+
+  //Set some data to sessionStorage:
+  uStore.local = {local_name:123};
+  uStore.local = {
+    local_age:1234,
+    local_items:[1,2,3,4]
+  };
+
+  //Get data from sessionStorage:
+  console.log(uStore.session);
+  console.log(uStore.local);
   </script>
 </body>
 </html>
