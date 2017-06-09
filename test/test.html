@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="../node_modules/next-js-core2/dist/next-js-core2.js"></script>
+  <script src="../node_modules/next-store/dist/next-store.js"></script>
+  <script src="../src/next-url-store.js"></script>
+  <script>
+    var uStore = new nx.UrlStore('__FEI_TE)ST_KEY');
+    uStore.session = {name:123};
+    uStore.session = {
+      age:1234,
+      items:[1,2,3,4]
+    };
+
+    console.log(uStore.session);
+  </script>
+</body>
+</html>
