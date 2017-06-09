@@ -32,7 +32,7 @@
       getter: function(inEngine){
         var stored = NxStore[inEngine];
         var cached = stored[ this._uniqKey ] || {};
-        return cached[ this._url ];
+        return cached[ this._url ] || {};
       },
       setter: function(inEngine,inValue){
         var oldValue = this.getter(inEngine);
