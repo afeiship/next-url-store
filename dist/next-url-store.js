@@ -31,8 +31,9 @@
         this.attachEvents();
       },
       attachEvents: function(){
+        var self = this;
         window.onhashchange = window.onpopstate = function(){
-          this._url = location.href;
+          self._url = location.href;
         };
       },
       getter: function(inEngine){
