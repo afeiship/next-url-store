@@ -50,6 +50,11 @@
         cache [ this._url ] = value;
         result[ this._uniqKey ] = cache;
         NxStore[ inEngine ] = result;
+      },
+      destroy:function(){
+        this._uniqKey = null;
+        this._url = null;
+        window.onhashchange = window.onpopstate = null;
       }
     }
   });
