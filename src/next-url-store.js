@@ -28,6 +28,12 @@
       init: function(inUniqKey){
         this._uniqKey = inUniqKey;
         this._url = location.href;
+        this.attachEvents();
+      },
+      attachEvents: function(){
+        window.onhashchange = window.onpopstate = function(){
+          this._url = location.href;
+        };
       },
       getter: function(inEngine){
         var stored = NxStore[inEngine];
