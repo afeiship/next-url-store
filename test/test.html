@@ -12,7 +12,7 @@
   <script src="../src/next-url-store.js"></script>
   <script>
   var NxUrlStore = nx.UrlStore || require('next-url-store');
-  var uStore =  new NxUrlStore('__A_UNIQUE_KEY__');
+  var uStore =  new NxUrlStore('__PGAGE_CACHE__');
 
   //Set some data to sessionStorage:
   uStore.session = {name:123};
@@ -23,7 +23,7 @@
 
 
   //Set some data to localStorage:
-  uStore.local = {local_name:123};
+  uStore.local = { local_name:123 };
   uStore.local = {
     local_age:1234,
     local_items:[1,2,3,4]
