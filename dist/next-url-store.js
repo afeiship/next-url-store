@@ -4,8 +4,8 @@
 
   var nx = global.nx || require('next-js-core2');
   var NxStore = nx.Store || require('next-store');
-  
-  var UrlStore = nx.declare('nx.UrlStore', {
+
+  var NxUrlStore = nx.declare('nx.UrlStore', {
     properties:{
       session: {
         get: function(){
@@ -61,7 +61,7 @@
 
 
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = UrlStore;
+    module.exports = NxUrlStore;
   }
 
 }());
