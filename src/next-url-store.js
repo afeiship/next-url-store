@@ -4,6 +4,7 @@
 
   var nx = global.nx || require('next-js-core2');
   var NxStore = nx.Store || require('next-store');
+  var NxDomEvent = nx.dom.Event || require('next-dom-event');
 
   var NxUrlStore = nx.declare('nx.UrlStore', {
     properties:{
@@ -32,9 +33,11 @@
       },
       attachEvents: function(){
         var self = this;
-        window.onhashchange = window.onpopstate = function(){
-          self._url = location.href;
+        var updateUrl = function(inUrl){
+          self._url = inUrl;
         };
+        this._hashEventRes = NxDomEvent.on('hashchange', updateUrl );
+        this._popEventRes = NxDomEvent.on('popstate', updateUrl );
       },
       getter: function(inEngine){
         var stored = NxStore[inEngine];
@@ -52,9 +55,10 @@
         NxStore[ inEngine ] = result;
       },
       destroy:function(){
+        this._hashEventRes.destroy();
+        this._popEventRes.destroy();
         this._uniqKey = null;
         this._url = null;
-        window.onhashchange = window.onpopstate = null;
       }
     }
   });
