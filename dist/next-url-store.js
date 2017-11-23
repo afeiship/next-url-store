@@ -36,8 +36,8 @@
         var updateUrl = function(inUrl){
           self._url = inUrl;
         };
-        this._hashEventRes = NxDomEvent.on('hashchange', updateUrl );
-        this._popEventRes = NxDomEvent.on('popstate', updateUrl );
+        this._hashEventRes = NxDomEvent.on( window, 'hashchange', updateUrl );
+        this._popEventRes = NxDomEvent.on( window, 'popstate', updateUrl );
       },
       getter: function(inEngine){
         var stored = NxStore[inEngine];
