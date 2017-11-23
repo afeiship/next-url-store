@@ -1,6 +1,6 @@
 (function () {
 
-  var global = global || this;
+  var global = global || this || self || window;
 
   var nx = global.nx || require('next-js-core2');
   var NxStore = nx.Store || require('next-store');
@@ -29,15 +29,13 @@
       init: function(inUniqKey){
         this._uniqKey = inUniqKey;
         this._url = location.href;
+        this.sync();
         this.attachEvents();
       },
       attachEvents: function(){
-        var self = this;
-        var updateUrl = function(){
-          self._url = location.href;
-        };
-        this._hashEventRes = NxDomEvent.on( window, 'hashchange', updateUrl );
-        this._popEventRes = NxDomEvent.on( window, 'popstate', updateUrl );
+        var sync =this.sync.bind(this);
+        this._hashEventRes = NxDomEvent.on( window, 'hashchange', sync );
+        this._popEventRes = NxDomEvent.on( window, 'popstate', sync );
       },
       getter: function(inEngine){
         var stored = NxStore[inEngine];
@@ -53,6 +51,10 @@
         cache [ this._url ] = value;
         result[ this._uniqKey ] = cache;
         NxStore[ inEngine ] = result;
+      },
+      sync: function(){
+        var self = this;
+        self._url = location.href;
       },
       destroy:function(){
         this._hashEventRes.destroy();
