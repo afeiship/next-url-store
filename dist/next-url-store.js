@@ -33,8 +33,8 @@
       },
       attachEvents: function(){
         var self = this;
-        var updateUrl = function(inUrl){
-          self._url = inUrl;
+        var updateUrl = function(){
+          self._url = location.href;
         };
         this._hashEventRes = NxDomEvent.on( window, 'hashchange', updateUrl );
         this._popEventRes = NxDomEvent.on( window, 'popstate', updateUrl );
