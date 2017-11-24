@@ -56,6 +56,16 @@
         var self = this;
         self._url = location.href;
       },
+      clear: function(inEngine,inKey){
+        var stored = NxStore[ inEngine ];
+        var cache = stored [ this._uniqKey ];
+        var result = {};
+        cache [ this._url ] = null;
+        result[ this._uniqKey ] = cache;
+        NxStore[ inEngine ] = result;
+      },
+      clears: function(){
+      },
       destroy:function(){
         this._hashEventRes.destroy();
         this._popEventRes.destroy();
