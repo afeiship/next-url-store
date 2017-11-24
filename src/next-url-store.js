@@ -55,17 +55,18 @@
         var self = this;
         self._url = location.href;
       },
-      clear: function (inEngine, inKey) {
+      clear: function (inEngine) {
         var stored = NxStore[inEngine];
         var cache = stored [this._uniqKey];
         var result = {};
-        cache [this._url] = null;
-        result[this._uniqKey] = cache;
-        NxStore[inEngine] = result;
+        if( cache ){
+          cache [this._url] = null;
+          result[this._uniqKey] = cache;
+          NxStore[inEngine] = result;
+        }
       },
       clears: function () {
         var stored = NxStore[inEngine];
-        var cache = stored [this._uniqKey];
         var result = {};
         result[this._uniqKey] = null;
         NxStore[inEngine] = result;
