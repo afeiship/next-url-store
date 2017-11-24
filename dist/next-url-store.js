@@ -57,7 +57,7 @@
       },
       clear: function (inEngine) {
         var stored = NxStore[inEngine];
-        var cache = stored [this._uniqKey];
+        var cache = stored [this._uniqKey] || {};
         var result = {};
         if( cache ){
           cache [this._url] = null;
