@@ -1,72 +1,76 @@
 (function () {
 
   var global = global || this || self || window;
-
   var nx = global.nx || require('next-js-core2');
   var NxStore = nx.Store || require('next-store');
   var NxDomEvent = nx.dom.Event || require('next-dom-event');
 
   var NxUrlStore = nx.declare('nx.UrlStore', {
-    properties:{
+    properties: {
       session: {
-        get: function(){
+        get: function () {
           return this.getter('session');
         },
-        set: function(inValue){
-          this.setter('session',inValue);
+        set: function (inValue) {
+          this.setter('session', inValue);
         }
       },
       local: {
-        get: function(){
+        get: function () {
           return this.getter('local');
         },
-        set: function(inValue){
-          this.setter('local',inValue);
+        set: function (inValue) {
+          this.setter('local', inValue);
         }
       }
     },
-    methods:{
-      init: function(inUniqKey){
+    methods: {
+      init: function (inUniqKey) {
         this._uniqKey = inUniqKey;
         this._url = location.href;
         this.sync();
         this.attachEvents();
       },
-      attachEvents: function(){
-        var sync =this.sync.bind(this);
-        this._hashEventRes = NxDomEvent.on( window, 'hashchange', sync );
-        this._popEventRes = NxDomEvent.on( window, 'popstate', sync );
+      attachEvents: function () {
+        var sync = this.sync.bind(this);
+        this._hashEventRes = NxDomEvent.on(window, 'hashchange', sync);
+        this._popEventRes = NxDomEvent.on(window, 'popstate', sync);
       },
-      getter: function(inEngine){
+      getter: function (inEngine) {
         var stored = NxStore[inEngine];
-        var cached = stored[ this._uniqKey ] || {};
-        return cached[ this._url ] || {};
+        var cached = stored[this._uniqKey] || {};
+        return cached[this._url] || {};
       },
-      setter: function(inEngine,inValue){
+      setter: function (inEngine, inValue) {
         var oldValue = this.getter(inEngine);
-        var value = nx.mix( oldValue, inValue );
-        var stored = NxStore[ inEngine ];
-        var cache = stored [ this._uniqKey ] || {};
+        var value = nx.mix(oldValue, inValue);
+        var stored = NxStore[inEngine];
+        var cache = stored [this._uniqKey] || {};
         var result = {};
-        cache [ this._url ] = value;
-        result[ this._uniqKey ] = cache;
-        NxStore[ inEngine ] = result;
+        cache [this._url] = value;
+        result[this._uniqKey] = cache;
+        NxStore[inEngine] = result;
       },
-      sync: function(){
+      sync: function () {
         var self = this;
         self._url = location.href;
       },
-      clear: function(inEngine,inKey){
-        var stored = NxStore[ inEngine ];
-        var cache = stored [ this._uniqKey ];
+      clear: function (inEngine, inKey) {
+        var stored = NxStore[inEngine];
+        var cache = stored [this._uniqKey];
         var result = {};
-        cache [ this._url ] = null;
-        result[ this._uniqKey ] = cache;
-        NxStore[ inEngine ] = result;
+        cache [this._url] = null;
+        result[this._uniqKey] = cache;
+        NxStore[inEngine] = result;
       },
-      clears: function(){
+      clears: function () {
+        var stored = NxStore[inEngine];
+        var cache = stored [this._uniqKey];
+        var result = {};
+        result[this._uniqKey] = null;
+        NxStore[inEngine] = result;
       },
-      destroy:function(){
+      destroy: function () {
         this._hashEventRes.destroy();
         this._popEventRes.destroy();
         this._uniqKey = null;

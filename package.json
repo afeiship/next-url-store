@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "next-js-core2": "github:afeiship/next-js-core2",
-    "next-store": "github:afeiship/next-store"
+    "next-store": "github:afeiship/next-store",
+    "next-dom-event": "github:afeiship/next-dom-event"
   }
 }
