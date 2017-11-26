@@ -33,8 +33,8 @@
       },
       attachEvents: function () {
         var sync = this.sync.bind(this);
-        this._hashEventRes = NxDomEvent.on(window, 'hashchange', sync);
-        this._popEventRes = NxDomEvent.on(window, 'popstate', sync);
+        this._hashEventRes = NxDomEvent.on(global, 'hashchange', sync);
+        this._popEventRes = NxDomEvent.on(global, 'popstate', sync);
       },
       getter: function (inEngine) {
         var stored = NxStore[inEngine];
@@ -52,8 +52,7 @@
         NxStore[inEngine] = result;
       },
       sync: function () {
-        var self = this;
-        self._url = location.href;
+        this._url = location.href;
       },
       clear: function (inEngine) {
         var stored = NxStore[inEngine];
